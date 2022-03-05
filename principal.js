@@ -1,8 +1,11 @@
 var juego = new Phaser.Game(400, 540, Phaser.CANVAS, 'bloque_juego');
 
 //Agregando los estados del juego
-juego.state.add('Juego', Juego);
+juego.state.add('Nivel1', Nivel1);
+juego.state.add('Nivel2', Nivel2);
+// juego.state.add('Nivel3', Nivel3);
+// juego.state.add('Nivel4', Nivel4);
 juego.state.add('Terminado', Terminado);
 
 //Inicializamos juego en el estado Juego
-juego.state.start('Juego');
+juego.state.start('Nivel1');
