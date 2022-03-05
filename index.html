@@ -1,25 +1,37 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>Shooter</title>
     <script src="phaser.js"></script>
     <script src="terminado.js"></script>
+    <script src="inicio.js"></script>
     <script src="juego.js"></script>
     <script src="principal.js"></script>
 
 
     <style>
-        body{
+        body {
             background: url('img/fondoBodyu.jpg');
             background-size: cover;
             background-position: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        #bloque_juego {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
     </style>
 </head>
+
 <body>
     <div id="bloque_juego"></div>
-
-    <p>Robles Aquije Roger David</p>
 </body>
+
 </html>
