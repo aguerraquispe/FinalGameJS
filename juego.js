@@ -28,6 +28,8 @@ var sonidoanimal;
 
 var Nivel1 = {
 	preload: function () {
+		vidas = 4;
+
 		juego.load.image('nave', 'img/personaje.png');
 		juego.load.image('comida', 'img/comida_pescados.png');
 		juego.load.image('malo', 'img/a_nivel1.png');
@@ -96,6 +98,7 @@ var Nivel1 = {
 
 		this.soundtrack.loop = true;
 		this.soundtrack.play();
+
 	},
 	update: function () {
 		//animacion del juego
