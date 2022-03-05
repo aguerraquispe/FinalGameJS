@@ -2,7 +2,7 @@ var fondoJuego;
 var nave;
 
 var balas;
-var tiempoEntreBalas = 400;
+var tiempoEntreBalas = 600;
 var tiempo = 0;
 
 var cursores;
@@ -14,6 +14,11 @@ var puntos;
 var txtPuntos;
 
 var vidas = 4;
+var vidasrestantes;
+var corazones4 =  "♥ ♥ ♥ ♥";
+var corazones3 =  "   ♥ ♥ ♥";
+var corazones2 =  "      ♥ ♥";
+var corazones1 =  "         ♥";
 var txtVidas;
 
 var soundtrack;
@@ -23,12 +28,13 @@ var sonido;
 var Nivel1 = {
 	preload: function () {
 		juego.load.image('nave', 'img/personaje.png');
-		juego.load.image('laser', 'img/laser.png');
+		juego.load.image('comida', 'img/comida_pescados.png');
 		juego.load.image('malo', 'img/a_nivel1.png');
 		juego.load.image('bg', 'img/bgnivel1.png');
 		juego.load.image('over', 'img/over.jpg');
 
 		this.load.audio('sonido', 'audio/lanzar.mp3');
+		this.load.audio('sonidoanimal', 'audio/sound_nutria.mp3');
 		this.load.audio('ost', 'audio/costa.mp3');
 		this.load.audio('finjuego', 'audio/final.mp3');
 	},
@@ -52,9 +58,9 @@ var Nivel1 = {
 		balas = juego.add.group();
 		balas.enableBody = true;
 		balas.setBodyType = Phaser.Physics.ARCADE;
-		balas.createMultiple(50, 'laser');
-		balas.setAll('anchor.x', 0.5);
-		balas.setAll('anchor.y', 0.5);
+		balas.createMultiple(50, 'comida');
+		balas.setAll('anchor.x', 0.7);
+		balas.setAll('anchor.y', 0.7);
 		balas.setAll('checkWorldBounds', true);
 		balas.setAll('outOfBoundsKill', true);
 
@@ -64,8 +70,8 @@ var Nivel1 = {
 		malos.enableBody = true;
 		malos.setBodyType = Phaser.Physics.ARCADE;
 		malos.createMultiple(30, 'malo');
-		malos.setAll('anchor.x', 0.5);
-		malos.setAll('anchor.y', 0.5);
+		malos.setAll('anchor.x', 0.7);
+		malos.setAll('anchor.y', 0.7);
 		malos.setAll('checkWorldBounds', true);
 		malos.setAll('outOfBoundsKill', true);
 
@@ -84,6 +90,7 @@ var Nivel1 = {
 
 
 		this.sonido = this.sound.add('sonido');
+		this.sound_nutria = this.sound.add('sound_nutria');
 		this.soundtrack = this.sound.add('ost');
 		this.gameover = this.sound.add('finjuego');
 		this.soundtrack.loop = true;
@@ -122,11 +129,11 @@ var Nivel1 = {
 			if (m.position.x > 390 && m.position.x < 391) {
 				vidas -= 1;
 				if (vidas == 3) {
-					txtVidas.text = "   ♥ ♥ ♥";
+					txtVidas.text =corazones3;
 				} else if (vidas == 2) {
-					txtVidas.text = "      ♥ ♥";
+					txtVidas.text =corazones2;
 				} else if (vidas == 1) {
-					txtVidas.text = "         ♥";
+					txtVidas.text =corazones1;
 				}
 				//txtVidas.text = vidas;
 			}
@@ -145,7 +152,6 @@ var Nivel1 = {
 		if (puntos == 5) {
 			this.soundtrack.loop = false;
 			this.soundtrack.stop();
-
 			juego.state.start('Nivel2');
 		}
 	},
@@ -159,7 +165,7 @@ var Nivel1 = {
 			bala.anchor.setTo(0.5);
 			bala.reset(nave.x, nave.y);
 			bala.rotation = juego.physics.arcade.angleToPointer(bala) + Math.PI / 2;
-			juego.physics.arcade.moveToPointer(bala, 200);
+			juego.physics.arcade.moveToPointer(bala, 300);
 		}
 	},
 
@@ -179,6 +185,7 @@ var Nivel1 = {
 		b.kill();
 		m.kill();
 
+		this.sound_nutria.play();
 		puntos++;
 		console.log(puntos)
 		txtPuntos.text = puntos;
@@ -247,7 +254,18 @@ var Nivel2 = {
 		//definir contador de vidas
 		// vidas = 4;
 		//juego.add.text(310, 20, "Vidas: ", { font: "14px Arial", fill: "#fff" });
-		txtVidas = juego.add.text(290, 10, "♥ ♥ ♥ ♥", { font: "30px Arial", fill: "#e42c2c" });
+
+		if (vidas == 4) {
+			vidasrestantes =corazones4;
+		} else if (vidas == 3) {
+			vidasrestantes =corazones3;
+		} else if (vidas == 2) {
+			vidasrestantes =corazones2;
+		} else if (vidas == 1) {
+			vidasrestantes =corazones1;
+		}
+
+		txtVidas = juego.add.text(290, 10, vidasrestantes, { font: "30px Arial", fill: "#e42c2c" });
 
 
 		this.sonido = this.sound.add('sonido');
@@ -411,10 +429,17 @@ var Nivel3 = {
 		juego.add.text(20, 20, "Nivel 2 - Puntos: ", { font: "18px Arial", fill: "#000" });
 		txtPuntos = juego.add.text(160, 20, puntos, { font: "18px Arial", fill: "#000" });
 
-		//definir contador de vidas
-		// vidas = 4;
-		//juego.add.text(310, 20, "Vidas: ", { font: "14px Arial", fill: "#fff" });
-		txtVidas = juego.add.text(290, 10, "♥ ♥ ♥ ♥", { font: "30px Arial", fill: "#e42c2c" });
+		if (vidas == 4) {
+			vidasrestantes =corazones4;
+		} else if (vidas == 3) {
+			vidasrestantes =corazones3;
+		} else if (vidas == 2) {
+			vidasrestantes =corazones2;
+		} else if (vidas == 1) {
+			vidasrestantes =corazones1;
+		}
+
+		txtVidas = juego.add.text(290, 10, vidasrestantes, { font: "30px Arial", fill: "#e42c2c" });
 
 
 		this.sonido = this.sound.add('sonido');
@@ -578,10 +603,17 @@ var Nivel4 = {
 		juego.add.text(20, 20, "Nivel 4 - Puntos: ", { font: "18px Arial", fill: "#000" });
 		txtPuntos = juego.add.text(160, 20, puntos, { font: "18px Arial", fill: "#000" });
 
-		//definir contador de vidas
-		// vidas = 4;
-		//juego.add.text(310, 20, "Vidas: ", { font: "14px Arial", fill: "#fff" });
-		txtVidas = juego.add.text(290, 10, "♥ ♥ ♥ ♥", { font: "30px Arial", fill: "#e42c2c" });
+		if (vidas == 4) {
+			vidasrestantes =corazones4;
+		} else if (vidas == 3) {
+			vidasrestantes =corazones3;
+		} else if (vidas == 2) {
+			vidasrestantes =corazones2;
+		} else if (vidas == 1) {
+			vidasrestantes =corazones1;
+		}
+
+		txtVidas = juego.add.text(290, 10, vidasrestantes, { font: "30px Arial", fill: "#e42c2c" });
 
 
 		this.sonido = this.sound.add('sonido');
