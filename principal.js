@@ -7,6 +7,7 @@ juego.state.add('Nivel3', Nivel3);
 juego.state.add('Nivel4', Nivel4);
 juego.state.add('Terminado', Terminado);
 juego.state.add('Inicio',Inicio);
+juego.state.add('Ganador',Ganador);
 
 //Inicializamos juego en el estado Juego
-juego.state.start('Inicio');
+juego.state.start('Terminado');
