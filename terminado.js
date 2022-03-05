@@ -11,9 +11,7 @@ var Terminado ={
 
 	update: function () {
 		if (juego.input.activePointer.isDown) {		
-			juego.state.start('Nivel1');					
-			this.gameover.loop = false;
-			this.gameover.stop();
+			juego.state.start('Inicio');	
 		}
 	}
 
