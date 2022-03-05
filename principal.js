@@ -10,4 +10,4 @@ juego.state.add('Inicio',Inicio);
 juego.state.add('Ganador',Ganador);
 
 //Inicializamos juego en el estado Juego
-juego.state.start('Terminado');
+juego.state.start('Inicio');

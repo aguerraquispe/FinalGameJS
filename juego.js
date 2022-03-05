@@ -227,8 +227,8 @@ var Nivel2 = {
 		balas.enableBody = true;
 		balas.setBodyType = Phaser.Physics.ARCADE;
 		balas.createMultiple(50, 'laser');
-		balas.setAll('anchor.x', 0.5);
-		balas.setAll('anchor.y', 0.5);
+		balas.setAll('anchor.x', 0.7);
+		balas.setAll('anchor.y', 0.7);
 		balas.setAll('checkWorldBounds', true);
 		balas.setAll('outOfBoundsKill', true);
 
@@ -238,8 +238,8 @@ var Nivel2 = {
 		malos.enableBody = true;
 		malos.setBodyType = Phaser.Physics.ARCADE;
 		malos.createMultiple(30, 'malo');
-		malos.setAll('anchor.x', 0.5);
-		malos.setAll('anchor.y', 0.5);
+		malos.setAll('anchor.x', 0.7);
+		malos.setAll('anchor.y', 0.7);
 		malos.setAll('checkWorldBounds', true);
 		malos.setAll('outOfBoundsKill', true);
 
@@ -408,8 +408,8 @@ var Nivel3 = {
 		balas.enableBody = true;
 		balas.setBodyType = Phaser.Physics.ARCADE;
 		balas.createMultiple(50, 'laser');
-		balas.setAll('anchor.x', 0.5);
-		balas.setAll('anchor.y', 0.5);
+		balas.setAll('anchor.x', 0.7);
+		balas.setAll('anchor.y', 0.7);
 		balas.setAll('checkWorldBounds', true);
 		balas.setAll('outOfBoundsKill', true);
 
@@ -419,8 +419,8 @@ var Nivel3 = {
 		malos.enableBody = true;
 		malos.setBodyType = Phaser.Physics.ARCADE;
 		malos.createMultiple(30, 'malo');
-		malos.setAll('anchor.x', 0.5);
-		malos.setAll('anchor.y', 0.5);
+		malos.setAll('anchor.x', 0.7);
+		malos.setAll('anchor.y', 0.7);
 		malos.setAll('checkWorldBounds', true);
 		malos.setAll('outOfBoundsKill', true);
 
@@ -585,8 +585,8 @@ var Nivel4 = {
 		balas.enableBody = true;
 		balas.setBodyType = Phaser.Physics.ARCADE;
 		balas.createMultiple(50, 'laser');
-		balas.setAll('anchor.x', 0.5);
-		balas.setAll('anchor.y', 0.5);
+		balas.setAll('anchor.x', 0.7);
+		balas.setAll('anchor.y', 0.7);
 		balas.setAll('checkWorldBounds', true);
 		balas.setAll('outOfBoundsKill', true);
 
@@ -596,8 +596,8 @@ var Nivel4 = {
 		malos.enableBody = true;
 		malos.setBodyType = Phaser.Physics.ARCADE;
 		malos.createMultiple(30, 'malo');
-		malos.setAll('anchor.x', 0.5);
-		malos.setAll('anchor.y', 0.5);
+		malos.setAll('anchor.x', 0.7);
+		malos.setAll('anchor.y', 0.7);
 		malos.setAll('checkWorldBounds', true);
 		malos.setAll('outOfBoundsKill', true);
 
@@ -605,7 +605,7 @@ var Nivel4 = {
 
 
 		//definiendo el puntaje en pantalla
-		puntos = 15;
+		puntos = 30;
 		juego.add.text(20, 20, "Nivel 4 - Puntos: ", { font: "18px Arial", fill: "#fff" });
 		txtPuntos = juego.add.text(160, 20, puntos, { font: "18px Arial", fill: "#fff" });
 
@@ -679,6 +679,16 @@ var Nivel4 = {
 			//musica final
 			this.gameover.play();
 			juego.state.start('Terminado');
+
+		}
+
+		if (puntos == 40) {
+			this.soundtrack.loop = false;
+			this.soundtrack.stop();
+
+			//musica final
+			this.gameover.play();
+			juego.state.start('Ganador');
 
 		}
 	},
